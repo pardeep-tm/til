@@ -1,0 +1,11 @@
+If we want to hook some custom mechanisms when we access obj.foo, property
+decorator should be used.
+property is a special kind of descriptor only, in which __get__ and __set__
+methods are defined in the class itself.
+
+Rules of thumb:
+
+1. If we are using lot of If/Else cases in __getattr__, probably we should
+implement it using properties. 
+2. Nearly 80% of the use cases are fullfilled through properties.
+3. If their are lot of properties in the code, try to do it using descriptors.
