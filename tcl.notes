@@ -1,0 +1,531 @@
+======================================================================
+						[Django]
+						
+1.	pip install MySQL-python
+
+2.	from django.conf import settings
+	settings.configure()
+	
+3.	Basic sql queries like Device.objects.all(), Device.objects.filter(name='ap')
+	are governed by Manager's get_queryset() method.
+	By defining more than one manager on a model, we can get common filters on that model.
+	First managet should be the basic default manager, as this manager would be 
+	used by several parts of django.
+	
+4.	Model methods are used to define actions before saving a record to db,
+	while Manager methods are to alter QuerySet results.
+	
+5.	Django ContentType model is extremely useful, if we want to write a generic
+	code which performs queries on any model in our app.
+	
+6.	Django coding guides:
+	http://lincolnloop.com/django-best-practices/
+	
+7.	python manage.py dumpdata --indent 4 device > /fixtures/local_fixtures.json
+	python manage.py loaddata --database nocout_dev <json_file>
+	
+8.	Return the field names:
+	Device.objects._meta.fields
+	
+9.	Signals::
+	=======
+	**	Importing post_save separately would not work:
+		from django.db.models import signals
+	1.	Receiver func must be called with kwargs, in any case.
+	2.	We can manually connect to a receiver func using:
+		request_finished.connect(callback_func)
+	3.	Or through @receiver decorator
+	4.	Put the signal registrations in models.py <----
+	5.	Note that all the signal in django are synchronous,
+		the main program will pause untill all the receivers are executed.
+	
+10.	Local mail server :
+	python -m smtpd -n -c DebuggingServer localhost:1025
+	
+11.	Eli Bendersky's Web: Found at SO	
+	http://eli.thegreenplace.net/archives/
+
+12.	http://www.planetdjango.org/opml.xml
+	http://stackoverflow.com/questions/867684/some-good-django-blogs-feeds-to-follow
+	
+======================================================================
+						[Git]
+	
+3.	http://www.pivotaltracker.com/help/api?version=v3#scm_post_commit
+
+4.	git reset --hard HEAD^  == To undo the last pull
+	git reset --soft HEAD^  == To undo the last commit
+	git reset --soft <sha-1> == To to go to a specific commit
+	git reset --hard <commit_number>
+	--------------
+	To revert a published(pushed) story:
+	git revert HEAD~1..HEAD
+	git cherry-pick --quit == To get an index with a clean tree 
+
+5.	git push -u origin dev_master
+
+6.	git stash --> then do git pull --> git stash apply
+
+7.	git diff HEAD
+
+8.	git diff --staged (to see diffs for most recent stage)
+
+9.	git checkout -- <file_name> (to discard changes in working directory)
+
+10.	git commit -am <commit> (To clean the tree from deleted files)
+	OR git rm <file_names>
+	
+11.	To merge dev_master into master, from master type :
+	git merge dev_master
+	
+12.	https://www.codeschool.com/courses/git-real
+
+13.	git remote -v
+	git remote add origin <repo_path>
+	git remote add peeyush <repo_path>
+	
+14.	git config --global credential.helper "cache --	timeout=3600"	
+	git config credential.helper store
+	git config --unset credential.helper
+	
+15.	git config core.autocrlf false
+
+16.	git branch -a
+	Show all the branches origin is having.
+	
+17.	git checkout -b dev_master origin/dev_master
+
+18. Changing the last commit message:
+	git commit --amend -m "New Message"
+	
+19.	To diff what has changed since last commit:
+    git diff HEAD^ HEAD
+    For a particular file -
+    git diff HEAD^ HEAD -- settings.py
+    
+    To show only modification, deletion n addition in a file -
+    git diff --diff-filter=MAD HEAD^ HEAD -- settings.py
+	
+20.	If there is a work to keep:
+	git stash
+	git stash pop
+	
+21.	Getting file from old commit:
+	git checkout [Revision_Key] -- <file_name>
+	
+22. Git diff between two files:
+	git diff dev_master master views.py
+	
+23.	git fetch <remote_http> <SHA>:refs/remotes/origin/<branch_name>
+
+24.	To remove all the untracked files n dirs:
+	git clean -d -fx ""
+	
+25.	To make branch from a specific commit:
+	git branch mybranch <sha1-of-commit>
+	git branch mybranch HEAD~3 (using symbolic names)
+	
+26.	Why git doesn't add an empty folder structure to git status ??
+
+27.	Make an existing git branch track a remote branch ::
+	git branch --set-upstream dev_master origin/dev_master
+	
+28. Removed an accidentally pushed remote git commit :
+    git checkout <branch>
+    git checkout <commit-sha>
+    git push -f -n
+    git push -f
+	
+=======================================================================
+						[Vim]
+	
+1.	Replacing tabes with 4 spaces in Vim :
+	:%s?\t?    ?gc
+	
+2.	:scriptnames list all the .vim files that vim loaded for you including your vimrc.
+	/etc/vim/vimrc
+	:help runtimepath
+	
+3.	Spaces to tabs in vim:
+	:set tabstop=4
+	:set noexpandtab
+	%retab!
+	
+4.	:help mark-motions
+	:help jump-motions
+	
+5.	`` : jump to prev cursor position
+	'' : jump to prev line, cursor was in
+	
+6.	Vim and python ::
+	http://sontek.net/blog/detail/turning-vim-into-a-modern-python-ide
+	http://blog.dispatched.ch/2009/05/24/vim-as-python-ide/
+	http://vimcasts.org/blog/2013/02/habit-breaking-habit-making/
+	
+7.	To disable cursor-wise motions :
+	:call HardMode()
+	To enable : 
+	:call EasyMode()
+	
+8.	Using ropevim :
+	https://github.com/python-rope/ropevim
+	
+9.	Vim commands from SO :
+	http://stackoverflow.com/questions/1276403/simple-vim-commands-you-wish-youd-known-earlier
+	http://stackoverflow.com/questions/1737163/traversing-text-in-insert-mode
+
+10.	Toggle hard mode by pressing \h
+
+11.	If u want to change the lines between
+	"Hey there" then put the cursor anywhere in "" and press `c i "`
+	c i ) and c i ( also works.
+	--> c a ) would delete the brackets as well
+	Ctrl + O --> move to previous files in buffer
+	Ctrl + o --> Issue one command while remain in insert mode
+
+	Ctrl-H --> Delete the char in front of cursor
+	Ctrl-W --> delete the word in front of the cursor
+	Ctrl-U --> delete all the characters in front of the cursor
+
+	shift-* --> Search the next occurence of the word
+	gd --> go to local declaration of the var
+	% --> Jump to matching item
+	cw --> remove the word in front of cursor and insert mode
+	. --> perform the last command
+	o --> Insert a new line after current line
+	O --> Insert a new line before current line
+	qa --> start recording and q --> stop recording
+	@a --> use the value stored in register a
+	:abbr pf pformat
+	[I --> Go to prototype of that function (works only in the proj directory)
+	:x --> Only saves the file if there are any changes, unlike :wq which always
+	saves the file
+	ma --> mark the position with marker a, later to return to position
+	press `a
+	
+
+12.	http://www.moolenaar.net/habits.html [Very helpful]
+	http://vimcasts.org/categories/
+
+13.	^O^O --> go to last edited file
+	:shell --> to to console temporarily and ^d come back to vi
+	cc --> removes the line and insert mode
+	dw --> delete the word above cursor position
+	db --> delete the word below cursor position
+	> --> indent selected rows
+	< --> unindent selected rows
+	= --> format selected code
+	VG --> select all code from current line upto end of file
+	:marks --> show all bookmarks in a file
+	Ctrl-c --> Escape insert mode
+	:set listchars=tab:>-,trail:_ list --> shows tabs and spaces in different visuals
+	Press % when the cursor is on a quote, paren, bracket, or brace to find its match.
+
+14.	:edit --> reload the current file
+	:edit! --> reload the file, after editing (your changes would be lost)
+	
+15. https://github.com/fatih/vim-go
+	
+	
+=======================================================================
+						[DB]
+						
+1.	http://www.julianbrowne.com/article/viewer/brewers-cap-theorem
+
+2.	https://www.youtube.com/watch?feature=player_embedded&v=tFp9pZ6U0PE
+	www.leadit.us/hands-on-tech/MongoDB-High-Performance-SQL-Free-Database
+	
+3.	mysqldump -d nocout_dev > my.sql
+	Dumps only database schema, excludes the values part.
+
+4.	mongod --dbpath /usr/local/var/mongodb2 --port 27018 --logpath /path/to/log --auth true
+	OR
+	mongod --config /path/to/config_file
+	
+5.	mysqldump -h localhost -p password --compact --no-set-names --no-data --skip-opt DB > dump.sql
+
+
+=======================================================================
+					[Python]
+					
+1.	c = copy.deepcopy(a)
+	In case of dict object, we have to perform deepcopy() in order to 
+	create a new object out of an existing object.
+	
+2.	d.pop('name') : This would pop the key/value pair out of dict d.
+	
+3.	f = attrgetter('name')
+	f(device) would return device.name
+	OR
+	f = operator.itemgetter('name')
+	f(device) <--- Same as attrgetter
+	The above two functions would return a callable object, which would fetch
+	'name' from its operand, i.e. device in this case.
+	
+4.	@staticmethod decorator would stop an instance from sending itself 
+	as an argument.
+	And thus declare a class method as static.
+	
+5.	Python module of the week:
+	http://pymotw.com
+	
+6.	Reconstructing python objects from dbs like MongoDB:
+	http://stackoverflow.com/questions/1305532/convert-python-dict-to-object
+	
+7.	dict objects' built-in function : setdefault
+	To set the default values, if values doesn't exist for a particular key
+	Very important, if want to get or set a dict key's value in same line
+	
+8.	Use list slicing : l[::-1] in place of reversed(l) --> slicing is more efficient
+
+9.	Diff b/w __str__ and __repr__ : __str__ is "unofficial" objects representation (for readability)
+	__repr__ is "official" representation of an object.By using __repr__ we can reconstruct the 
+	object using eval()
+	
+10.	globals() : Represent the global modules used in the environment.
+	Using globals() we can access any global var or func by giving their
+	name as a string
+	
+11.	__builtin__ module : To use python built-in functions directly, in a
+	module
+	
+12.	execfile() to parse/execute a python file, file is not loaded as a module but parsed
+	uncondionally and data is stored in local dict variables.Dict variables'
+	name should match in file variables
+	
+13.	os.stat(filepath) : Returns the stat() for that file, like
+	-file size, last_modification, last_access, user_id, group_id
+	
+14.	Use check_mk style traversing, used in include(), to traverse a folder
+	recursively.
+	root, dirs, files = os.walk(dir_path)
+	
+15.	marshal module is used mainly for reading n writing "pseudo-compiled"
+	code for python modules of `.pyc` files
+	For other platform independent object serialization/deserialization
+	, use pickle instead. <-- performance is comparable
+	
+16.	s = 'Tue Jun 10 12:34:09 2014'
+	datetime.datetime.strptime(s, '%a %b %d %H:%M:%S %Y')
+	
+17.	Use __ as var name, if var not to be used after unpacking, like
+	r, __, t = filename.rpartition('.')
+	
+18.	Since str are immutable in python, to replace some chars:
+	'My string is this'.translate(None, 'm') <-- will only strip small m.
+	
+19.	https://developers.google.com/edu/python/exercises/log-puzzle
+	http://www.pythonchallenge.com/
+	http://www.hackerearth.com/
+	
+20.	eval(file('/home/pardeep/puzz1.py').read())
+
+21.	If dict grows dynamically in our function, then should use:
+	keys = d.viewkeys() over d.keys()
+	Bcz viewkeys() return a view over dict current elements
+	
+22.	from timeit import Timer
+	OR
+	python -mtimeit -s <code-string to execute>
+	
+23.	Eli Bendersky's Web: Found at SO	
+	http://eli.thegreenplace.net/archives/
+	
+24.	Time wise search operations for a string:
+	re.match('some', s) > s.find('some') > 'some' in s
+	in operator is fastest
+	
+25.	How to refer to local functions in a module ??
+	from __main__ import func1
+	
+26.	http://www.pythoncentral.io/how-to-sort-a-list-tuple-or-object-with-sorted-in-python/
+
+27.	Python standard How to modules ::
+	https://docs.python.org/2/howto/functional.html
+	
+28.	re.match, matches at the beginging of the string only,
+	while re.search, searches for whole string.
+	
+29.	Should not use pop to remove duplicate entries from
+	a list using a loop:
+	--> Create a new list which dont contain unwanted elements
+	--> OR If lists r very large, see this ::
+	http://stackoverflow.com/questions/5162991/list-manipulation-in-python-with-pop
+	--> OR Use simple filter
+	
+30.	iter() could be used to read lines of a file, untill a certain line is
+	reached.
+	
+31.	http://regex101.com/r/rT2dY0/1
+
+32.	Beautiful python code illustrating getopt:
+	http://www.opensource.apple.com/source/python/python-3/python/Tools/scripts/rgrep.py
+
+33.	Using pipe in place of files, in large files
+	Writing to the pipe, never involves writing to disk.
+
+34.	Python writes in chunk of 4096 bytes, use f.flush() if we want to
+	write data in one go.
+
+35.	PyCONS : GIL
+	http://www.dabeaz.com/python/NewGIL.pdf
+	http://www.dabeaz.com/python/GIL.pdf
+	
+36. http://pythontutor.com/
+
+37. http://interactivepython.org
+
+38. http://code.activestate.com/
+
+39. http://www.jeffknupp.com/blog/2013/02/14/drastically-improve-your-python-understanding-pythons-execution-model/
+
+40. Double fork magic in Linux ::
+    http://stackoverflow.com/questions/881388/what-is-the-reason-for-performing-a-double-fork-when-creating-a-daemon
+    
+41. Python program performance analysis ::
+    http://www.huyng.com/posts/python-performance-analysis/
+    
+42. https://freepythontips.wordpress.com/2013/08/04/args-and-kwargs-in-python-explained/
+    https://freepythontips.wordpress.com/2013/07/30/20-python-libraries-you-cant-live-without/
+    
+43. Markdown cheatsheet ::
+    http://daringfireball.net/projects/markdown/dingus
+
+=======================================================================
+				[Linux & Bash]
+1.	http://stackoverflow.com/questions/68372/what-is-your-single-most-favorite-command-line-trick-using-bash
+
+2.	To kill all processes by its name:
+	ps auxww | grep 'celery worker' | awk '{print $2}' | xargs kill
+
+3.	kill -9 would let the process to finish its task, before killing it
+
+4.  http://www.slashroot.in/linux-system-io-monitoring
+
+5.  Nice answer on Real, User and Sys process time uses :
+    http://stackoverflow.com/questions/556405/what-do-real-user-and-sys-mean-in-the-output-of-time1
+=========================================================================
+			[Celery Dependency]
+1.	pip pckgs celery pytz billiard kombu anyjson amqp
+2.	apt-get install rabbitmq-server
+3.	pip install flower
+	Dependency : tornado certifi backports.ssl-match-hostname
+4.	celery -A nocout beat -s /opt/omd/sites/pardeep_slave_1/tmp/run/celerybeat-schedule
+	-----------------------------------------
+
+5.	print statements should be written to backend/logfile
+	Where is log file ??
+6.	Daemonize the celery worker and beat
+
+-------------------------------------------------
+        [MySQL]
+1.  http://dba.stackexchange.com/questions/58459/mysql-error-impossible-to-write-to-binary-log
+2.  changed the server-id = 0 from 2, to stop replication from mysql master --> restart
+    #log_bin                 = /data01/var/log/mysql/mysql-bin
+    #log_bin_index           = /data01/var/log/mysql/mysql-bin.index
+    # not fab for performance, but safer
+    #sync_binlog             = 1
+    #expire_logs_days        = 10
+3.  http://stackoverflow.com/questions/15694168/error-tablespace-for-table-xxx-exists-please-discard-the-tablespace-before-imp
+
+	
+------------------------------------------------
+        [TODOs]
+        
+    We should not keep the whoel doc in Mongodb, if there is no value.....
+    QUEUE --> Jeff Knupp article, celery, http://emptysqua.re/blog/
+        
+1.  Class based ETL
+    -- May be using some approach listed in `Python design techniques`
+    -- Class mixins can be used
+
+2.  What is Spark ?  
+    Using Python with Spark
+    
+3.  SQLAlchemy
+
+4.  Read generators by Dav Beazley
+    Generators and Coroutines
+    Read Jeff Knoop's article based on Coroutines ans Subroutines
+    Coroutines based gevent  
+    gevent + gevent speeches @pycon2011
+
+---------------------------------------
+Traps ::
+
+1.  Write and deploy script to delete data from snmptt and snmptt_unknown, which has been processed.
+    
+    Keep a `refer` like field in current/clear --> To read data upto that field,
+    keep in memory and process --> this would reduce delete in a loop
+    
+    Write a separate job which reads from history_alarms and processes data into
+    Clear/current alarms table
+    
+    Update id_info only after all insertions has been completed
+
+2.  In the SNMP trap settings form, trap name should not be the unique key
+
+---------------------------------------------------------------------------------------------
+
+Lv2)y7+B
+
+ONGURGA01092956
+
+
+            [work]
+        
+    1.  Use generators instead of list to return values from functions
+        --> run the celery beat seperately --> Using init commands
+        --> Heapq lib in python
+        --> log rotation on celery*.log
+             
+    2.  Bring rest aggr scripts to Prod2
+
+------------------------------------------------------------
+    [TODO: Shinken]   
+    
+    1.  Duplicate data in Network ETL
+    2.  Manage inventory loading in Redis after UA-DA sync
+    3.  Deploy celery and beat using init functions
+    4.  Manage memory utilization by celery workers [use batch method]
+        Read all values from Q and then break the tasks into batches
+    5.  Modify absolute paths for conf files to relative paths
+    
+    (P2 Tasks)
+    1.  Severity calculations for events (separately for RTA and PL)
+    
+------------------------------------------------------------
+ 
+        [Mysql installation on Pollers]
+1.  Copy the zip folder to /omd/mysql
+    Unzip it and replace its my.cnf with appripriate file.
+    Change the bind IP address to local ip.
+    Place the mysql.server [modified] to /etc/rc.d/init.d/mysqld --> with chmod 777 (root/root)
+    Copy the mysqlenv.sh to /etc/profiles.d/ --> with chmod 777 (root/root)
+2.  Create dir - /var/run/mysqld/mysqld.pid,mysqld.sock and /var/log/mysql/mysql_error.log
+    Add tmadmin to mysql group  
+3.  Mysql base dir - /omd/mysql/ must have permissions as 664 with mysqld.sock as 777
+5.  Run scipts/mysql_install_db
+-------------------------------------------------------------------------------------------------------------
+
+            [TODO: Shinken: Latest]
+    1.  Sync and live poll - 
+    
+            Remove hard coding of paths [To be tested]
+            Add authentication mechanism for APIs
+            Introduce chord and group
+     2. Remove hard coding of memcache servers from db_ops.py [To be tested]
+     3. Remove hard coded thresholds and site name from KPI etl (form memc)
+     
+    4.  Remove the site name from redis keys --> [To be tested]
+    
+    5. Remove hard coding of memcache servers from live polling.
+    
+    6. Remove hard coding of memcache servers from kpi_etl (age since last state).
+    
+    7. How to process data from a queue having multiple machines data stored in it.
+
+
+
+
+ 
