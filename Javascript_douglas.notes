@@ -9,4 +9,10 @@
 6.  Make a new empty object: {}, new Object(), object(Object.prototype) --> {} is the preferred way
 7.  delete arr[num] would make a hole in arr, instead if use arr.splice(num, 1) would remove the num & renumbers all the following
     array elements
-8.  
+8.  Functions can store key/value pairs, they can have methods becz functions are objects
+9.  If the function is called with too many args, extra args are ignored; if function is called with too few args, the missing
+    values are undefined. There is no implicit type checking on the arguments
+10. When a function is called, it gets extra parameter along with its arguments called arguments, which is an array like object
+11. We can augment basic built-ins by adding method to prototype property of that built-in, like String.prototype
+12. Don't use new String(), new Boolean() and new Integer, bcz its of no use instead it jsut wraps values into object containers
+13. 
