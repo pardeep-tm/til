@@ -1,0 +1,12 @@
+1.  Looping over an object using `for` statement, we should check for this condition:
+    if (object.hasOwnProperty(name)) {}
+2.  There is no `void` return type for javascript functions, if return nothing function would return `undefined`
+3.  We cannot use reserved keywords as property name in object dot notation:
+      obj.goto would fail, need to use obj["goto] in such cases
+4.  We can create a new object with a linkage to object `o` through function object by: object(o). Linkage provides a simple
+    inheritance machanism
+5.  All objects are linked directly or in-directly to Object.prototype
+6.  Make a new empty object: {}, new Object(), object(Object.prototype) --> {} is the preferred way
+7.  delete arr[num] would make a hole in arr, instead if use arr.splice(num, 1) would remove the num & renumbers all the following
+    array elements
+8.  
