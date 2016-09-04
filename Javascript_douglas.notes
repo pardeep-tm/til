@@ -15,4 +15,6 @@
 10. When a function is called, it gets extra parameter along with its arguments called arguments, which is an array like object
 11. We can augment basic built-ins by adding method to prototype property of that built-in, like String.prototype
 12. Don't use new String(), new Boolean() and new Integer, bcz its of no use instead it jsut wraps values into object containers
-13. 
+13. If we think in a prototypical inheritance way, then we can leverage javascript in a better way
+14. In a function body, `this` points to global object while `window` does the same in a web browser
+
