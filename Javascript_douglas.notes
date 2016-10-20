@@ -1,3 +1,7 @@
+                          Basic Stuff & Intro [class 1]
+                          
+http://javascript.crockford.com/
+
 1.  Looping over an object using `for` statement, we should check for this condition:
     if (object.hasOwnProperty(name)) {}
 2.  There is no `void` return type for javascript functions, if return nothing function would return `undefined`
@@ -17,4 +21,8 @@
 12. Don't use new String(), new Boolean() and new Integer, bcz its of no use instead it jsut wraps values into object containers
 13. If we think in a prototypical inheritance way, then we can leverage javascript in a better way
 14. In a function body, `this` points to global object while `window` does the same in a web browser
-
+15. Javascript is used in lot of places besides browsers like Mac dashboard, Desktop applications, embedded form etc
+16. Javascript dont have block scoping, blocks cant be used for variable scoping. Since it dont have block scoping we should define
+    all the variables at the start of a function
+17. a == b and a != b are bad because it does a type coersion, a === b and a !== b good way
+18. 
