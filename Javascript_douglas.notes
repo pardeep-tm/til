@@ -25,4 +25,24 @@ http://javascript.crockford.com/
 16. Javascript dont have block scoping, blocks cant be used for variable scoping. Since it dont have block scoping we should define
     all the variables at the start of a function
 17. a == b and a != b are bad because it does a type coersion, a === b and a !== b good way
-18. 
+
+                                  Theory of DOM [class 2]
+1. We should not put type=text/javascript when using src=URL tag, because if program sees src tag then it ignores type tag as it
+   trusts the server sending the script
+2. Place <script src> as close to the bottom of the body as possible. Also place CSS link as high in the head as possible
+3. Minify and gzip the script files ---> has a huge impact on performance of the pages
+4. Reduce the number of script files as much as possible
+5. Don't use document.write
+6. DOM structure is a example of classical binary tree as each node have two pointers, firstChild and nextSibling
+7. Practice to write code for --> walkTheDOM() and getElementsByClassName() [at 29:01 video]
+8. node.getElementById(string_id), node.getElementsByName(nodeName), node.createElement(tagName), node.cloneNode(),
+   node.cloneNode(true) <-- clone an element and all its descendents
+   Node elements created this way won't be connected to DOM, i.e. they won't have parent pointer set by default
+9. So, linking elements to the DOM: node.appendChild(new), node.insertBefore(new, sibling), node.replaceChild(new, old)
+10. Remove elements: node.removeChild(new) <-- remember to remove any event handlers on that object tooo
+11. innerHTML: We can compile an HTML code and insert directly into DOM
+12. Events: The browser has event-driven, single threaded, asynchronous programming model. Events cause the invocation of
+    event handler functions
+    Even handler: The handler takes an optional event parameter
+    
+    [49:00 video]
