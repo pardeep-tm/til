@@ -44,5 +44,11 @@ http://javascript.crockford.com/
 12. Events: The browser has event-driven, single threaded, asynchronous programming model. Events cause the invocation of
     event handler functions
     Even handler: The handler takes an optional event parameter
-    
-    [49:00 video]
+13. To prevent the default action of a event handler: set the return value of an event object to false -> e.returnValue = false
+14. We need to remove all the event handlers associated on a particular DOM element before we want to detach it from the DOM completely,
+    to break the reference counting cycles
+    So we need to remove all the event handlers from a node when we call such methods: removeChild, replaceChild, innerHTML etc.
+    Try writing the function purgeEventHandlers(node)  [57:00 video]
+15. alert(text) is not a javascript function its from DOM. We should not use it with ajax coz it blocks the thread execution
+16. window object is also javascript global object
+
