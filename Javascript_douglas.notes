@@ -52,3 +52,13 @@ http://javascript.crockford.com/
 15. alert(text) is not a javascript function its from DOM. We should not use it with ajax coz it blocks the thread execution
 16. window object is also javascript global object
 
+                              Advanced Javascript [class 3]
+1. Prototypal Inheritance: Class-free, Objects inherit from an objects, Inherited object keeps a secret link to object from
+   which it inherited
+   var newObject = object(Oldobject);
+   Changes in oldObject can be immediately reflected in newObject but changes to newObject wont be reflected in oldObject
+2. Pseudoclassical - three mechanisms
+   --> Constructor mechanism
+   --> The new operator
+   --> The prototype member of functions
+   
