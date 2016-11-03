@@ -59,6 +59,15 @@ http://javascript.crockford.com/
    Changes in oldObject can be immediately reflected in newObject but changes to newObject wont be reflected in oldObject
 2. Pseudoclassical - three mechanisms
    --> Constructor mechanism
-   --> The new operator
    --> The prototype member of functions
+   --> The new operator
+   Methods shared through prototype object does not consume memory for each instance: Constructor.prototype.firstMethod,
+   this can be treated same as classmethods in python.
+3. When functions are supposed to be used with new keywork they work as constructor,
+   var newObject = new Constructor(); ---> returns a new object with a link to Constructor.prototype
+   If new is omitted, the global object is clobbered and global object is returned instead of a new object, there is no compile
+   time or run time check
+4. Differential inheritance: We can add constants and methods to function's prototype (function.prototype) to be returned with every
+   object produced, without having objects to be enlarged to contain them.
+5. object.prototype.constructor --> points back to object itself [14:09]
    
