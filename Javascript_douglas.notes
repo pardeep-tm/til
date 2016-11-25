@@ -69,5 +69,7 @@ http://javascript.crockford.com/
    time or run time check
 4. Differential inheritance: We can add constants and methods to function's prototype (function.prototype) to be returned with every
    object produced, without having objects to be enlarged to contain them.
-5. object.prototype.constructor --> points back to object itself [14:09]
+5. object.prototype.constructor --> points back to object itself
+6. Need to look into [18:42]
+7. We can directly stick a method or fucntion to exsiting object and it will work coz self binding happen at late in javascript
    
