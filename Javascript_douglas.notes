@@ -57,7 +57,8 @@ http://javascript.crockford.com/
    which it inherited
    var newObject = object(Oldobject);
    Changes in oldObject can be immediately reflected in newObject but changes to newObject wont be reflected in oldObject
-2. Pseudoclassical - three mechanisms
+2. Pseudoclassical - 
+   By combining these three mechanisms we get the pseudiclassical patterns -   
    --> Constructor mechanism
    --> The prototype member of functions
    --> The new operator
